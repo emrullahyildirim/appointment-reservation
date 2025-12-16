@@ -1,0 +1,15 @@
+C:\Users\atura\OneDrive\Masaüstü\Yarışma\dotnet\hackathon-microservices-project\Services\AuthService\AuthService.Entities\bin\Debug\net8.0\AuthService.Entities.deps.json
+C:\Users\atura\OneDrive\Masaüstü\Yarışma\dotnet\hackathon-microservices-project\Services\AuthService\AuthService.Entities\bin\Debug\net8.0\AuthService.Entities.dll
+C:\Users\atura\OneDrive\Masaüstü\Yarışma\dotnet\hackathon-microservices-project\Services\AuthService\AuthService.Entities\bin\Debug\net8.0\AuthService.Entities.pdb
+C:\Users\atura\OneDrive\Masaüstü\Yarışma\dotnet\hackathon-microservices-project\Services\AuthService\AuthService.Entities\bin\Debug\net8.0\Core.dll
+C:\Users\atura\OneDrive\Masaüstü\Yarışma\dotnet\hackathon-microservices-project\Services\AuthService\AuthService.Entities\bin\Debug\net8.0\Core.pdb
+C:\Users\atura\OneDrive\Masaüstü\Yarışma\dotnet\hackathon-microservices-project\Services\AuthService\AuthService.Entities\obj\Debug\net8.0\AuthService.Entities.csproj.AssemblyReference.cache
+C:\Users\atura\OneDrive\Masaüstü\Yarışma\dotnet\hackathon-microservices-project\Services\AuthService\AuthService.Entities\obj\Debug\net8.0\AuthService.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\atura\OneDrive\Masaüstü\Yarışma\dotnet\hackathon-microservices-project\Services\AuthService\AuthService.Entities\obj\Debug\net8.0\AuthService.Entities.AssemblyInfoInputs.cache
+C:\Users\atura\OneDrive\Masaüstü\Yarışma\dotnet\hackathon-microservices-project\Services\AuthService\AuthService.Entities\obj\Debug\net8.0\AuthService.Entities.AssemblyInfo.cs
+C:\Users\atura\OneDrive\Masaüstü\Yarışma\dotnet\hackathon-microservices-project\Services\AuthService\AuthService.Entities\obj\Debug\net8.0\AuthService.Entities.csproj.CoreCompileInputs.cache
+C:\Users\atura\OneDrive\Masaüstü\Yarışma\dotnet\hackathon-microservices-project\Services\AuthService\AuthService.Entities\obj\Debug\net8.0\AuthServ.752D47D3.Up2Date
+C:\Users\atura\OneDrive\Masaüstü\Yarışma\dotnet\hackathon-microservices-project\Services\AuthService\AuthService.Entities\obj\Debug\net8.0\AuthService.Entities.dll
+C:\Users\atura\OneDrive\Masaüstü\Yarışma\dotnet\hackathon-microservices-project\Services\AuthService\AuthService.Entities\obj\Debug\net8.0\refint\AuthService.Entities.dll
+C:\Users\atura\OneDrive\Masaüstü\Yarışma\dotnet\hackathon-microservices-project\Services\AuthService\AuthService.Entities\obj\Debug\net8.0\AuthService.Entities.pdb
+C:\Users\atura\OneDrive\Masaüstü\Yarışma\dotnet\hackathon-microservices-project\Services\AuthService\AuthService.Entities\obj\Debug\net8.0\ref\AuthService.Entities.dll
