@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="BusinessAspect\" />
+    <Folder Include="CCS\" />
+    <Folder Include="Constants\" />
+    <Folder Include="DependencyResolvers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+	 <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <ProjectReference Include="..\..\..\Shared\Core\Core.csproj" />
+    <ProjectReference Include="..\DataAccess\PatientService.DataAccess.csproj" />
+    <ProjectReference Include="..\Entities\PatientService.Entities.csproj" />
+    <ProjectReference Include="..\PatientService.DataAccess\PatientService.DataAccess.csproj" />
+    <ProjectReference Include="..\PatientService.Entities\PatientService.Entities.csproj" />
+  </ItemGroup>
+
+</Project>
