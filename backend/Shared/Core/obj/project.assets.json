@@ -2536,11 +2536,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Shared\\Core\\Core.csproj",
+      "projectUniqueName": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Shared\\Core\\Core.csproj",
       "projectName": "Core",
-      "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Shared\\Core\\Core.csproj",
+      "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Shared\\Core\\Core.csproj",
       "packagesPath": "C:\\Users\\atura\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Shared\\Core\\obj\\",
+      "outputPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Shared\\Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

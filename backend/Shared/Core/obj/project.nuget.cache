@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nTObI3FS0u8=",
+  "dgSpecHash": "b7DdKHKIGEY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Shared\\Core\\Core.csproj",
+  "projectFilePath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Shared\\Core\\Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\atura\\.nuget\\packages\\bouncycastle.cryptography\\2.5.1\\bouncycastle.cryptography.2.5.1.nupkg.sha512",
     "C:\\Users\\atura\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",

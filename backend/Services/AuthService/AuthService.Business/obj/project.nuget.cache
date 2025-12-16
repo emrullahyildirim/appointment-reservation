@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CW6li7/JixY=",
+  "dgSpecHash": "KfVdSjRD3Ew=",
   "success": true,
-  "projectFilePath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.Business\\AuthService.Business.csproj",
+  "projectFilePath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.Business\\AuthService.Business.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\atura\\.nuget\\packages\\autofac\\8.2.0\\autofac.8.2.0.nupkg.sha512",
     "C:\\Users\\atura\\.nuget\\packages\\autofac.extensions.dependencyinjection\\10.0.0\\autofac.extensions.dependencyinjection.10.0.0.nupkg.sha512",

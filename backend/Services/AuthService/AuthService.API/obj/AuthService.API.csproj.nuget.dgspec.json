@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.API\\AuthService.API.csproj": {}
+    "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.API\\AuthService.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.API\\AuthService.API.csproj": {
+    "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.API\\AuthService.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.API\\AuthService.API.csproj",
+        "projectUniqueName": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.API\\AuthService.API.csproj",
         "projectName": "AuthService.API",
-        "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.API\\AuthService.API.csproj",
+        "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.API\\AuthService.API.csproj",
         "packagesPath": "C:\\Users\\atura\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.API\\obj\\",
+        "outputPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -34,8 +34,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.Business\\AuthService.Business.csproj": {
-                "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.Business\\AuthService.Business.csproj"
+              "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.Business\\AuthService.Business.csproj": {
+                "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.Business\\AuthService.Business.csproj"
               }
             }
           }
@@ -102,14 +102,14 @@
         }
       }
     },
-    "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.Business\\AuthService.Business.csproj": {
+    "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.Business\\AuthService.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.Business\\AuthService.Business.csproj",
+        "projectUniqueName": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.Business\\AuthService.Business.csproj",
         "projectName": "AuthService.Business",
-        "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.Business\\AuthService.Business.csproj",
+        "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.Business\\AuthService.Business.csproj",
         "packagesPath": "C:\\Users\\atura\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.Business\\obj\\",
+        "outputPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.Business\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -132,8 +132,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.DataAccess\\AuthService.DataAccess.csproj": {
-                "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.DataAccess\\AuthService.DataAccess.csproj"
+              "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.DataAccess\\AuthService.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.DataAccess\\AuthService.DataAccess.csproj"
               }
             }
           }
@@ -187,14 +187,14 @@
         }
       }
     },
-    "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.DataAccess\\AuthService.DataAccess.csproj": {
+    "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.DataAccess\\AuthService.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.DataAccess\\AuthService.DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.DataAccess\\AuthService.DataAccess.csproj",
         "projectName": "AuthService.DataAccess",
-        "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.DataAccess\\AuthService.DataAccess.csproj",
+        "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.DataAccess\\AuthService.DataAccess.csproj",
         "packagesPath": "C:\\Users\\atura\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.DataAccess\\obj\\",
+        "outputPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -217,8 +217,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.Entities\\AuthService.Entities.csproj": {
-                "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.Entities\\AuthService.Entities.csproj"
+              "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.Entities\\AuthService.Entities.csproj": {
+                "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.Entities\\AuthService.Entities.csproj"
               }
             }
           }
@@ -274,14 +274,14 @@
         }
       }
     },
-    "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.Entities\\AuthService.Entities.csproj": {
+    "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.Entities\\AuthService.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.Entities\\AuthService.Entities.csproj",
+        "projectUniqueName": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.Entities\\AuthService.Entities.csproj",
         "projectName": "AuthService.Entities",
-        "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.Entities\\AuthService.Entities.csproj",
+        "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.Entities\\AuthService.Entities.csproj",
         "packagesPath": "C:\\Users\\atura\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Services\\AuthService\\AuthService.Entities\\obj\\",
+        "outputPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Services\\AuthService\\AuthService.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -304,8 +304,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Shared\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Shared\\Core\\Core.csproj"
+              "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Shared\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Shared\\Core\\Core.csproj"
               }
             }
           }
@@ -345,14 +345,14 @@
         }
       }
     },
-    "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Shared\\Core\\Core.csproj": {
+    "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Shared\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Shared\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Shared\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Shared\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Shared\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\atura\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\dotnet\\hackathon-microservices-project\\Shared\\Core\\obj\\",
+        "outputPath": "C:\\Users\\atura\\OneDrive\\Masaüstü\\Yarışma\\appointment-reservation\\backend\\Shared\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
