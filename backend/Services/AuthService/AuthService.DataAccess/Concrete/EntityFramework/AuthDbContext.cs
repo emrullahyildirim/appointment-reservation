@@ -36,6 +36,7 @@ namespace AuthService.DataAccess.Concrete.EntityFramework
                 entity.Property(e => e.PhoneNumber).HasMaxLength(20);
                 entity.Property(e => e.PasswordHash).IsRequired();
                 entity.Property(e => e.PasswordSalt).IsRequired();
+                entity.Property(e => e.IdentityNumber).IsRequired().HasMaxLength(11);
             });
 
             // OperationClaim Configuration

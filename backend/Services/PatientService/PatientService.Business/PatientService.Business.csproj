@@ -14,12 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
+	 <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <ProjectReference Include="..\..\..\Shared\Core\Core.csproj" />
     <ProjectReference Include="..\DataAccess\PatientService.DataAccess.csproj" />
     <ProjectReference Include="..\Entities\PatientService.Entities.csproj" />
     <ProjectReference Include="..\PatientService.DataAccess\PatientService.DataAccess.csproj" />
     <ProjectReference Include="..\PatientService.Entities\PatientService.Entities.csproj" />
-	 <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
   </ItemGroup>
 
 </Project>

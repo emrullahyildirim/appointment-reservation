@@ -43,6 +43,7 @@ namespace AuthService.Business.Concrete
             _mailService = mailService;
         }
 
+
         [ValidationAspect(typeof(RegisterValidator))]
         public IDataResult<TokenDto> Register(UserForRegisterDto userForRegisterDto)
         {
@@ -65,6 +66,7 @@ namespace AuthService.Business.Concrete
                 PhoneNumber = userForRegisterDto.PhoneNumber?.Trim(),
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
+                IdentityNumber = userForRegisterDto.IdentityNumber.Trim(),
                 Status = true,
                 IsEmailVerified = false,
                 CreatedDate = DateTime.UtcNow
@@ -84,7 +86,7 @@ namespace AuthService.Business.Concrete
             }
 
             // Send verification email
-            SendVerificationEmail(user);
+            //SendVerificationEmail(user);
 
             // Create tokens
             var claims = _userDal.GetClaims(user);

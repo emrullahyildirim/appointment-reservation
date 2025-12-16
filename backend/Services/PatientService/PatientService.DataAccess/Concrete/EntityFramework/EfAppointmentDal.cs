@@ -7,5 +7,6 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfAppointmentDal : EfEntityRepositoryBase<Appointment, PatientAppointmentContext>, IAppointmentDal
     {
+
     }
 }

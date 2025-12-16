@@ -31,8 +31,20 @@ builder.Services.AddScoped<IPatientService, PatientManager>();
 builder.Services.AddScoped<IPatientDal, EfPatientDal>();
 
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
+
 var app = builder.Build();
 
+app.UseCors("AllowAll");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -43,22 +55,22 @@ if (app.Environment.IsDevelopment())
 
 if (app.Environment.IsDevelopment())
 {
+    using var scope = app.Services.CreateScope();
+    var services = scope.ServiceProvider;
+
     try
     {
-        using var scope = app.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<PatientAppointmentContext>();
-
-        //logger.LogInformation("Applying database migrations...");
-        dbContext.Database.Migrate();
-        //logger.LogInformation("Database migrations applied successfully.");
+        var db = services.GetRequiredService<PatientAppointmentContext>();
+        db.Database.Migrate();
     }
     catch (Exception ex)
     {
-        throw ex;
-        //var logger = app.Services.GetRequiredService<ILogger<Program>>();
-        //logger.LogError(ex, "An error occurred while migrating the database. Make sure PostgreSQL is running and connection string is correct.");
+        //var logger = services.GetRequiredService<ILogger<Program>>();
+        //logger.LogError(ex, "Database migration failed");
+        //throw;
     }
 }
+
 
 app.UseHttpsRedirection();
 

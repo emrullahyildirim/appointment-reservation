@@ -19,6 +19,7 @@ namespace AuthService.Entities.Concrete
         public DateTime? LockoutEndTime { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedDate { get; set; }
+        public string IdentityNumber { get; set; }
 
         // Navigation Properties
         public virtual ICollection<UserOperationClaim> UserOperationClaims { get; set; } = new List<UserOperationClaim>();

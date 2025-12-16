@@ -1,5 +1,7 @@
 using AuthService.Business.Abstract;
+using AuthService.Business.External.Dtos;
 using AuthService.Entities.DTOs;
+using AutoMapper;
 using Core.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,15 +15,18 @@ namespace AuthService.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
-
-        public AuthController(IAuthService authService)
+        private readonly IPatientService _patientService;
+        private readonly IMapper _mapper;
+        public AuthController(IAuthService authService, IHttpClientFactory httpClientFactory, IPatientService patientService, IMapper mapper)
         {
             _authService = authService;
+            _patientService = patientService;
+            _mapper = mapper;
         }
 
-        /// <summary>
-        /// Yeni kullanıcı kaydı
-        /// </summary>
+
+
+
         [HttpPost("register")]
         [ProducesResponseType(typeof(ApiResponse<TokenDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
@@ -32,12 +37,15 @@ namespace AuthService.API.Controllers
             if (!result.IsSuccess)
                 return BadRequest(ApiResponse.ErrorResponse(result.Message));
 
+            var patientResult = _mapper.Map<CreatePatientDto>(userForRegisterDto);
+            _patientService.CreatePatient(patientResult);
+
             return Ok(ApiResponse<TokenDto>.SuccessResponse(result.Data, result.Message));
         }
 
-        /// <summary>
-        /// Kullanıcı girişi
-        /// </summary>
+
+
+
         [HttpPost("login")]
         [ProducesResponseType(typeof(ApiResponse<TokenDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status401Unauthorized)]
@@ -51,9 +59,8 @@ namespace AuthService.API.Controllers
             return Ok(ApiResponse<TokenDto>.SuccessResponse(result.Data, result.Message));
         }
 
-        /// <summary>
-        /// Access token yenileme
-        /// </summary>
+
+
         [HttpPost("refresh-token")]
         [ProducesResponseType(typeof(ApiResponse<TokenDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status401Unauthorized)]
@@ -67,9 +74,8 @@ namespace AuthService.API.Controllers
             return Ok(ApiResponse<TokenDto>.SuccessResponse(result.Data, result.Message));
         }
 
-        /// <summary>
-        /// Kullanıcı çıkışı
-        /// </summary>
+
+
         [Authorize]
         [HttpPost("logout")]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
@@ -84,9 +90,7 @@ namespace AuthService.API.Controllers
             return Ok(ApiResponse.SuccessResponse(result.Message));
         }
 
-        /// <summary>
-        /// Şifre sıfırlama emaili gönder
-        /// </summary>
+
         [HttpPost("forgot-password")]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
         public IActionResult ForgotPassword([FromBody] ForgotPasswordDto forgotPasswordDto)
@@ -95,9 +99,7 @@ namespace AuthService.API.Controllers
             return Ok(ApiResponse.SuccessResponse(result.Message));
         }
 
-        /// <summary>
-        /// Şifre sıfırlama
-        /// </summary>
+
         [HttpPost("reset-password")]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
@@ -111,9 +113,7 @@ namespace AuthService.API.Controllers
             return Ok(ApiResponse.SuccessResponse(result.Message));
         }
 
-        /// <summary>
-        /// Email doğrulama
-        /// </summary>
+
         [HttpGet("verify-email")]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
@@ -127,9 +127,7 @@ namespace AuthService.API.Controllers
             return Ok(ApiResponse.SuccessResponse(result.Message));
         }
 
-        /// <summary>
-        /// Doğrulama emaili yeniden gönder
-        /// </summary>
+
         [HttpPost("resend-verification-email")]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
@@ -143,9 +141,7 @@ namespace AuthService.API.Controllers
             return Ok(ApiResponse.SuccessResponse(result.Message));
         }
 
-        /// <summary>
-        /// Şifre değiştirme (giriş yapmış kullanıcı için)
-        /// </summary>
+
         [Authorize]
         [HttpPost("change-password")]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]

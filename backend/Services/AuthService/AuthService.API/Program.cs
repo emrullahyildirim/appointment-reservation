@@ -22,6 +22,8 @@ using Microsoft.AspNetCore.Mvc;
 using Core.Utilities.Result;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using AuthService.Business.Mapping.Profiles;
+using AuthService.Business.External.ApiSettings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -89,6 +91,35 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 
 builder.Services.Configure<SendGridOptions>(builder.Configuration.GetSection("MailOptions"));
 builder.Services.AddScoped<IMailService, SendGridMailSender>();
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+
+
+// Zaman kalırsa event bus ekle bunu sil
+
+
+var patientSerivce = builder.Configuration.GetSection("PatientService").Get<ServiceApi>();
+
+
+builder.Services.AddHttpClient<IPatientService, PatientManager>(client =>
+{
+    client.BaseAddress = new Uri($"{patientSerivce.Path}");
+}).ConfigurePrimaryHttpMessageHandler(() =>
+{
+    return new HttpClientHandler
+    {
+        ServerCertificateCustomValidationCallback =
+            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    };
+}); ;
+
+
+
+
+
+
+
+
+
 
 // Add Swagger
 builder.Services.AddEndpointsApiExplorer();

@@ -1,5 +1,6 @@
 ﻿using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using PatientService.Entities.Enums;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,25 @@ namespace PatientService.DataAccess.Concrete.EntityFramework
         {
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (optionsBuilder.IsConfigured)
+            {
+                return;
+            }
+
+            var conn = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+            if (!string.IsNullOrEmpty(conn))
+            {
+                optionsBuilder.UseNpgsql(conn);
+            }
+            else
+            {
+                // fallback (development vs.)
+                optionsBuilder.UseNpgsql("Host=localhost;Database=PatientAppointmentDb;Username=postgres;Password=1234");
+            }
+        }
+
 
         public DbSet<Patient> Patient { get; set; }
         public DbSet<Appointment> Appointment { get; set; }
@@ -28,6 +48,9 @@ namespace PatientService.DataAccess.Concrete.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+
+
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Patient>(entity =>

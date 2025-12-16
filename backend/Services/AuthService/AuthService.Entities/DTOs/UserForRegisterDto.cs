@@ -9,6 +9,9 @@ namespace AuthService.Entities.DTOs
         public string FirstName { get; set; } = string.Empty;
         public string? LastName { get; set; }
         public string? PhoneNumber { get; set; }
+        public string IdentityNumber { get; set; }
+        public DateOnly BirthDate { get; set; }
+        public string Gender { get; set; }
     }
 }
 
