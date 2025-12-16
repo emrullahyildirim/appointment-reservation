@@ -1,10 +1,17 @@
 using Business.Abstract;
 using Business.Concrete;
+using Core.CrossCuttingConcerns.Logging;
+using Core.Utilities.Notification.Mail;
+using Core.Utilities.Notification.Mail.SmptMail;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.EntityFrameworkCore;
+using PatientService.Business.Abstract;
+using PatientService.Business.Concrete;
 using PatientService.Business.Mapping.Profiles;
+using PatientService.DataAccess.Abstract;
 using PatientService.DataAccess.Concrete.EntityFramework;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +26,17 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 builder.Services.AddDbContext<PatientAppointmentContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("PatientAppointmentDb")));
 
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.Console()
+    //.WriteTo.File("logs/authservice-.log", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
+
+builder.Services.AddSingleton<ILoggerServiceBase, SerilogLogger>();
+
+
 
 
 builder.Services.AddScoped<IAppointmentService, AppointmentManager>();
@@ -29,6 +47,18 @@ builder.Services.AddScoped<IAppointmentSlotDal, EfAppointmentSlotDal>();
 
 builder.Services.AddScoped<IPatientService, PatientManager>();
 builder.Services.AddScoped<IPatientDal, EfPatientDal>();
+
+builder.Services.AddScoped<IWaitlistService, WaitlistManager>();
+builder.Services.AddScoped<IWaitlistDal, EfWaitlistDal>();
+
+
+builder.Services.AddScoped<IDoctorDal, EfDoctorDal>();
+builder.Services.AddScoped<IDoctorService, DoctorManager>();
+
+builder.Services.AddScoped<IDoctorTitleDal, EfDoctorTitleDal>();
+builder.Services.AddScoped<IDoctorTitleService, DoctorTitleManager>();
+
+builder.Services.AddScoped<IMailService, MailSender>();
 
 
 builder.Services.AddCors(options =>

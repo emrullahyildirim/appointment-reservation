@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PatientService.DataAccess.Concrete.EntityFramework;
@@ -11,9 +12,11 @@ using PatientService.DataAccess.Concrete.EntityFramework;
 namespace PatientService.DataAccess.Migrations
 {
     [DbContext(typeof(PatientAppointmentContext))]
-    partial class PatientAppointmentContextModelSnapshot : ModelSnapshot
+    [Migration("20251216225541_doctor-doctorTitle-added")]
+    partial class doctordoctorTitleadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

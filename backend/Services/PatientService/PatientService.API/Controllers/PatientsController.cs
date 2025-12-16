@@ -3,6 +3,7 @@ using Business.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PatientService.Business.Abstract;
 using PatientService.Entities.DTOs.Patient;
 
 namespace PatientService.API.Controllers
@@ -19,6 +20,18 @@ namespace PatientService.API.Controllers
             _patientService = patientService;
             _mapper = mapper;
         }
+
+        [HttpGet("all")]
+        public IActionResult GetAll()
+        {
+            var result = _patientService.GetAll();
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+        }
+
 
         [HttpPost]
         public IActionResult AddPatient(CreatePatientDto patientCreateDto)

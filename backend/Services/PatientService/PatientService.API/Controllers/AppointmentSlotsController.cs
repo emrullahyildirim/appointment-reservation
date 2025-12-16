@@ -17,6 +17,26 @@ namespace PatientService.API.Controllers
         }
 
 
+        [HttpGet("all")]
+        public IActionResult Get()
+        {
+            var result = _appointmentSlotService.GetAll();
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+
+        [HttpGet("healtcheck")]
+        public IActionResult HealthCheck()
+        {
+            return Ok("AppointmentSlot Service is running.");
+        }
+
+
+
         [HttpGet("byDoctorId")]
         public IActionResult GetByDoctorId(int id)
         {

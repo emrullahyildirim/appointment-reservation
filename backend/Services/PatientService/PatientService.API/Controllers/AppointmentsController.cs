@@ -20,6 +20,26 @@ namespace PatientService.API.Controllers
         }
 
 
+        [HttpGet("all")]
+        public IActionResult Get()
+        {
+            var result = _appointmentService.GetAll();
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+
+        [HttpGet("healtcheck")]
+        public IActionResult HealthCheck()
+        {
+            return Ok("Appointment Service is running.");
+        }
+
+
+
         [HttpGet("history")]
         public IActionResult GetHistories(int patientId)
         {

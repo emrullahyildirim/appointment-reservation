@@ -41,6 +41,11 @@ namespace Business.Concrete
             return new ErrorDataResult<List<AppointmentSlot>>();
         }
 
+        public IDataResult<List<AppointmentSlot>> GetAvailableSlot(DateOnly preferredDate, TimeOnly? preferredStartTime, TimeOnly? preferredEndTime)
+        {
+            throw new NotImplementedException();
+        }
+
         public IDataResult<AppointmentSlot> GetById(int id)
         {
             return new SuccessDataResult<AppointmentSlot>(_appointmentslotDal.Get(p => p.Id == id));

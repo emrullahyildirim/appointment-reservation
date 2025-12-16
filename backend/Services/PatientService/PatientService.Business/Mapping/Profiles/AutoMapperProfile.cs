@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Entities.Concrete;
+using PatientService.Entities.Concrete;
 using PatientService.Entities.DTOs.Appointment;
 using PatientService.Entities.DTOs.Patient;
+using PatientService.Entities.DTOs.Waitlist;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,8 @@ namespace PatientService.Business.Mapping.Profiles
             CreateMap<Appointment, CreateAppointmentDto>().ReverseMap();
 
             CreateMap<Patient, CreatePatientDto>().ReverseMap();
+            CreateMap<Waitlist, AddToWaitlistDto>().ReverseMap();
+
 
         }
     }
