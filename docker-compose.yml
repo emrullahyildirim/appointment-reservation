@@ -4,8 +4,14 @@ services:
   patient_website:
     build: ./frontend/patient
     ports:
-      - "70:80"
+      - "7000:80"
 
+  auth_service:
+    build: 
+      context: ./backend
+      dockerfile: Services/AuthService/Dockerfile
+    ports:
+      - "7001:8080"
   
   nginx_gateway:
     image: nginx:alpine3.23
