@@ -1,5 +1,6 @@
 ﻿using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
+using PatientService.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,12 +39,12 @@ namespace PatientService.DataAccess.Concrete.EntityFramework
                 entity.Property(e => e.IdentityNumber).IsRequired().HasMaxLength(11);
                 entity.Property(e => e.FirstName).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.LastName).HasMaxLength(50);
-                entity.Property(s => s.CreatedAt).HasDefaultValueSql("GETDATE()");
+                entity.Property(s => s.CreatedAt).HasDefaultValueSql("NOW()");
 
                 entity.HasMany(p => p.Appointments)
                       .WithOne(a => a.Patient)
-                      .HasForeignKey(a => a.PatientId)
-                      .OnDelete(DeleteBehavior.Restrict);
+                      .HasForeignKey(a => a.PatientId);
+
             });
 
 
@@ -51,22 +52,39 @@ namespace PatientService.DataAccess.Concrete.EntityFramework
             {
                 entity.ToTable("AppointmentSlots");
                 entity.HasKey(s => s.Id);
-                entity.Property(s => s.StartTime).IsRequired();
-                entity.Property(s => s.EndTime).IsRequired();
-                entity.Property(s => s.Status)
-                      .IsRequired()
-                      .HasMaxLength(20);
+                entity.Property(s => s.StartTime)
+                      .HasColumnType("time")
+                      .IsRequired();
 
-                entity.Property(s => s.CreatedAt).HasDefaultValueSql("GETDATE()");
-                entity.HasIndex(s => new { s.DoctorId, s.StartTime, s.EndTime })
-                      .IsUnique(); // aynı doktora aynı saatten 2 slot açılmasın
+                entity.Property(s => s.EndTime)
+                      .HasColumnType("time")
+                      .IsRequired();
+
+                entity.Property(a => a.Status)
+                      .IsRequired()
+                      .HasConversion<int>();
+
+
+                entity.Property(a => a.SlotDate)
+                      .HasColumnType("date")
+                      .IsRequired();
+
+        
+                entity.Property(s => s.CreatedAt).HasDefaultValueSql("NOW()");
+
+                entity.HasIndex(s => new {
+                    s.DoctorId,
+                    s.SlotDate,
+                    s.StartTime,
+                    s.EndTime
+                }).IsUnique();
 
                 entity.HasOne(s => s.Appointment)
                       .WithOne(a => a.AppointmentSlot)
                       .HasForeignKey<Appointment>(a => a.SlotId)
                       .OnDelete(DeleteBehavior.Restrict);
             });
-
+            
 
             modelBuilder.Entity<Appointment>(entity =>
             {
@@ -74,19 +92,9 @@ namespace PatientService.DataAccess.Concrete.EntityFramework
                 entity.HasKey(a => a.Id);
                 entity.Property(a => a.Status)
                       .IsRequired()
-                      .HasConversion<string>() 
-                      .HasMaxLength(20);
+                      .HasConversion<int>();
 
-                entity.Property(a => a.CreatedAt).HasDefaultValueSql("GETDATE()");
-                entity.HasOne<Patient>()
-                      .WithMany()
-                      .HasForeignKey(a => a.PatientId)
-                      .OnDelete(DeleteBehavior.Restrict);
-
-                entity.HasOne<AppointmentSlot>()
-                      .WithOne()
-                      .HasForeignKey<Appointment>(a => a.SlotId)
-                      .OnDelete(DeleteBehavior.Restrict);
+                entity.Property(a => a.CreatedAt).HasDefaultValueSql("NOW()");
 
                 entity.HasIndex(a => a.SlotId).IsUnique(); 
             });

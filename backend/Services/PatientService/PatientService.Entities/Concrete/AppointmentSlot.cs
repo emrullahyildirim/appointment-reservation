@@ -1,4 +1,5 @@
 using Core.Entities;
+using PatientService.Entities.Enums;
 
 namespace Entities.Concrete
 {
@@ -9,7 +10,7 @@ namespace Entities.Concrete
         public DateOnly SlotDate { get; set; }
         public TimeOnly StartTime { get; set; }
         public TimeOnly EndTime { get; set; }
-        public string Status { get; set; }
+        public AppointmentSlotStatus Status { get; set; }
         public DateTime CreatedAt { get; set; }
 
         public virtual Appointment? Appointment { get; set; }

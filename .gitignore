@@ -1,4 +1,3 @@
-backend/.vs/
-backend/bin/
-backend/obj/
-
+backend/.vs
+backend/**/bin/
+backend/**/obj/

@@ -7,10 +7,10 @@ namespace Entities.Concrete
     {
         public int Id { get; set; }
         public int PatientId { get; set; }
-        public int DocktorId { get; set; }
+        public int DoctorId { get; set; }
         public int SlotId { get; set; }
-        public AppointmentStatus? Status { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public AppointmentStatus Status { get; set; }
+        public DateTime CreatedAt { get; set; } 
 
 
         public virtual Patient Patient { get; set; } = null!;

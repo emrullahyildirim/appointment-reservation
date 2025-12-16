@@ -25,7 +25,6 @@ using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure Serilog
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .WriteTo.Console()
@@ -34,25 +33,20 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 
-// Add Logger Service
 builder.Services.AddSingleton<ILoggerServiceBase, SerilogLogger>();
 
-// Add Autofac
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
     containerBuilder.RegisterModule(new AuthBusinessModule());
 });
 
-// Add DbContext
 builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("AuthDb")));
 
-// Add Token Options
 var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>()!;
 builder.Services.Configure<TokenOptions>(builder.Configuration.GetSection("TokenOptions"));
 
-// Add JWT Authentication
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -72,15 +66,12 @@ builder.Services.AddAuthentication(options =>
         ClockSkew = TimeSpan.Zero
     };
 });
-// Add Controllers
 builder.Services.AddControllers();
 
-// FluentValidation - Otomatik request doğrulama
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssemblyContaining<AuthService.Business.ValidationRules.FluentValidation.RegisterValidator>();
 
-// FluentValidation hata formatını özelleştir
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.InvalidModelStateResponseFactory = context =>
@@ -96,7 +87,6 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     };
 });
 
-// Add Mail Service
 builder.Services.Configure<SendGridOptions>(builder.Configuration.GetSection("MailOptions"));
 builder.Services.AddScoped<IMailService, SendGridMailSender>();
 

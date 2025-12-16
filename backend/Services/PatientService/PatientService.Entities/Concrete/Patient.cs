@@ -8,7 +8,7 @@ namespace Entities.Concrete
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime BirthDate { get; set; }
+        public DateOnly BirthDate { get; set; }
         public string Gender { get; set; }
         public string IdentityNumber { get; set; }
         public DateTime CreatedAt { get; set; }
