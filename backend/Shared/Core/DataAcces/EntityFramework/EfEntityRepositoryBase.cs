@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using SendGrid.Helpers.Mail;
 using System.Linq.Expressions;
 
 namespace Core.DataAcces.EntityFramework
@@ -85,6 +86,30 @@ namespace Core.DataAcces.EntityFramework
             {
                 return context.Set<TEntity>().AsNoTracking().SingleOrDefault(filter);
             }
+        }
+
+        public async Task<List<TEntity>> GetAllAsyncAsNoTracking(Expression<Func<TEntity, bool>> filter = null)
+        {
+            using (TContext context = new TContext())
+            {
+                IQueryable<TEntity> query = context.Set<TEntity>();
+
+                if (filter != null)
+                    query = query.Where(filter);
+
+                return await query.AsNoTracking().ToListAsync();
+            }
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> filter)
+        {
+            using (TContext context = new TContext())
+            {
+                return await context.Set<TEntity>()
+                            .AsNoTracking()
+                            .AnyAsync(filter);
+            }
+
         }
     }
 }

@@ -1,9 +1,16 @@
 using Business.Abstract;
 using Business.Concrete;
+using Core.CrossCuttingConcerns.Logging;
+using Core.Utilities.Notification.Mail;
+using Core.Utilities.Notification.Mail.SmptMail;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.EntityFrameworkCore;
+using PatientService.API.BackgroundJobs;
+using PatientService.Business.Abstract;
+using PatientService.Business.Concrete;
 using PatientService.Business.Mapping.Profiles;
+using PatientService.DataAccess.Abstract;
 using PatientService.DataAccess.Concrete.EntityFramework;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +37,14 @@ builder.Services.AddScoped<IAppointmentSlotDal, EfAppointmentSlotDal>();
 builder.Services.AddScoped<IPatientService, PatientManager>();
 builder.Services.AddScoped<IPatientDal, EfPatientDal>();
 
+builder.Services.AddScoped<IDoctorService, DoctorManager>();
+builder.Services.AddScoped<IDoctorDal, EfDoctorDal>();
+
+builder.Services.AddScoped<IWaitlistService, WaitlistManager>();
+builder.Services.AddScoped<IWaitlistDal, EfWaitlistDal>();
+builder.Services.AddSingleton<ILoggerServiceBase, SerilogLogger>();
+builder.Services.AddScoped<IMailService, MailSender>();
+
 
 builder.Services.AddCors(options =>
 {
@@ -40,6 +55,8 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
+
+builder.Services.AddHostedService<SlotGenerationBackgroundService>();
 
 
 var app = builder.Build();
@@ -53,7 +70,11 @@ app.UseCors("AllowAll");
     });
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/patient/v1/swagger.json", "PatientService API V1");
+        // Development: doğrudan çalıştırma, Production: nginx arkasından
+        var endpoint = app.Environment.IsDevelopment() 
+            ? "/swagger/v1/swagger.json" 
+            : "/swagger/patient/v1/swagger.json";
+        c.SwaggerEndpoint(endpoint, "PatientService API V1");
         c.RoutePrefix = "swagger";
     });
 

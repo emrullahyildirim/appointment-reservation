@@ -32,6 +32,12 @@ namespace PatientService.Business.Concrete
             return new SuccessDataResult<List<Doctor>>(_doctorDal.GetAll(),"Message");
         }
 
+        public async Task<IDataResult<List<Doctor>>> GetAllAsyncAsNoTracking()
+        {
+            var doctors = await _doctorDal.GetAllAsyncAsNoTracking();
+            return new SuccessDataResult<List<Doctor>>(doctors);
+        }
+
         public IDataResult<List<Appointment>> GetAppointmentsByDoctorId(int doctorId)
         {
             var appointments = _doctorDal.GetDoctorWithAppointments(doctorId);

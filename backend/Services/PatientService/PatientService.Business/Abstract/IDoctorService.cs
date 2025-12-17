@@ -11,6 +11,7 @@ namespace PatientService.Business.Abstract
         IResult Delete(Doctor doctor);
         IDataResult<Doctor> GetById(int id);
         IDataResult<List<Appointment>> GetAppointmentsByDoctorId(int doctorId);
+        Task<IDataResult<List<Doctor>>> GetAllAsyncAsNoTracking();
         IDataResult<List<Doctor>> GetAll();
     }
 }

@@ -13,6 +13,7 @@ namespace Business.Abstract
         IDataResult<List<AppointmentSlot>> GetAll();
         IDataResult<List<AppointmentSlot>> GetAllByDoctorId(int id);
         IDataResult<List<AppointmentSlot>> GetAvailableSlot(DateOnly preferredDate, TimeOnly? preferredStartTime , TimeOnly? preferredEndTime);
+        Task<IResult> GenerateFutureSlotsAsync();
     }
 }
 

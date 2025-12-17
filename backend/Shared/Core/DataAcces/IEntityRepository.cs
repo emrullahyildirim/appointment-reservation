@@ -7,12 +7,15 @@ namespace Core.DataAcces
     {
         int GetTotalCount(Expression<Func<T, bool>> filter = null);
         List<T> GetAll(Expression<Func<T, bool>> filter = null);
+        Task<List<T>> GetAllAsyncAsNoTracking(Expression<Func<T, bool>> filter = null);
         T Get(Expression<Func<T, bool>> filter);
         T GetAsNoTracking(Expression<Func<T, bool>> filter);
         void Add(T entity);
         void Update(T entity);
         void Remove(T entity);
         void RemoveAll(Expression<Func<T, bool>> filter = null);
+        Task<bool> AnyAsync(Expression<Func<T, bool>> filter);
+
 
     }
 }
