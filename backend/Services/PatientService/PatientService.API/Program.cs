@@ -18,10 +18,8 @@ using PatientService.DataAccess.Concrete.EntityFramework;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at 
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
@@ -110,10 +108,18 @@ builder.Services.AddSwaggerGen(c =>
 var app = builder.Build();
 
 app.UseCors("AllowAll");
-// Configure the HTTP request pipeline.
 
+<<<<<<< HEAD
 app.UseSwagger();
 app.UseSwaggerUI();
+=======
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/patient/v1/swagger.json", "PatientService API V1");
+        c.RoutePrefix = "swagger";
+    });
+>>>>>>> f70f20f (fix: stabilize patient service swagger and database startup with healthchecks)
 
 
 
@@ -122,18 +128,8 @@ if (app.Environment.IsDevelopment())
     using var scope = app.Services.CreateScope();
     var services = scope.ServiceProvider;
 
-    try
-    {
-        var db = services.GetRequiredService<PatientAppointmentContext>();
-        // Geliştirme ortamında, şema yoksa otomatik oluştur (migrations'a bağlı kalmadan)
-        db.Database.EnsureCreated();
-    }
-    catch (Exception ex)
-    {
-        //var logger = services.GetRequiredService<ILogger<Program>>();
-        //logger.LogError(ex, "Database migration failed");
-        //throw;
-    }
+    var db = services.GetRequiredService<PatientAppointmentContext>();
+    db.Database.Migrate();
 }
 
 
