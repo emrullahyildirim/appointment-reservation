@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #2c60f5;
+  --color-secondary: #21346d;
+  --color-error: #d53434;
+  --color-info: #cfa83d;
+  --color-success: #30baa5;
+
+  --color-background: #f6f6f6;
+  --color-dark-grey: #5d5c5f;
+  --color-soft-grey: #9d9ca1;
+}
+
+@layer base {
+  * {
+    font-family: "Poppins", sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  body {
+    @apply bg-background;
+  }
+
+  input,
+  button {
+    @apply border-0;
+  }
+
+  input:focus,
+  button:focus {
+    @apply outline-0;
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    transform: translateY(15px);
+  }
+
+  50% {
+    transform: translateY(0px);
+  }
+
+  100% {
+	transform: translateY(15px);
+  }
+}
+
+.animation-wiggle {
+	animation: wiggle 3s infinite;
+}
