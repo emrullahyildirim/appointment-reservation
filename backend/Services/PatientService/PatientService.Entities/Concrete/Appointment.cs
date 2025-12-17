@@ -1,4 +1,5 @@
 using Core.Entities;
+using PatientService.Entities.Concrete;
 using PatientService.Entities.Enums;
 
 namespace Entities.Concrete
@@ -15,6 +16,7 @@ namespace Entities.Concrete
 
         public virtual Patient Patient { get; set; } = null!;
         public virtual AppointmentSlot AppointmentSlot { get; set; } = null!;
+        public virtual Doctor Doctor { get; set; } = null!;
 
     }
 }

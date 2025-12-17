@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PatientService.DataAccess.Concrete.EntityFramework;
@@ -11,9 +12,11 @@ using PatientService.DataAccess.Concrete.EntityFramework;
 namespace PatientService.DataAccess.Migrations
 {
     [DbContext(typeof(PatientAppointmentContext))]
-    partial class PatientAppointmentContextModelSnapshot : ModelSnapshot
+    [Migration("20251216225541_doctor-doctorTitle-added")]
+    partial class doctordoctorTitleadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,44 +60,6 @@ namespace PatientService.DataAccess.Migrations
                         .IsUnique();
 
                     b.ToTable("Appointments", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2024, 12, 10, 10, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 1,
-                            PatientId = 1,
-                            SlotId = 2,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2024, 12, 11, 11, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 2,
-                            PatientId = 2,
-                            SlotId = 5,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(2024, 12, 12, 14, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 3,
-                            PatientId = 3,
-                            SlotId = 8,
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedAt = new DateTime(2024, 12, 13, 16, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 5,
-                            PatientId = 4,
-                            SlotId = 13,
-                            Status = 1
-                        });
                 });
 
             modelBuilder.Entity("Entities.Concrete.AppointmentSlot", b =>
@@ -131,158 +96,6 @@ namespace PatientService.DataAccess.Migrations
                         .IsUnique();
 
                     b.ToTable("AppointmentSlots", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 1,
-                            EndTime = new TimeOnly(9, 30, 0),
-                            SlotDate = new DateOnly(2025, 1, 15),
-                            StartTime = new TimeOnly(9, 0, 0),
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 1,
-                            EndTime = new TimeOnly(10, 0, 0),
-                            SlotDate = new DateOnly(2025, 1, 15),
-                            StartTime = new TimeOnly(9, 30, 0),
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 1,
-                            EndTime = new TimeOnly(10, 30, 0),
-                            SlotDate = new DateOnly(2025, 1, 15),
-                            StartTime = new TimeOnly(10, 0, 0),
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 1,
-                            EndTime = new TimeOnly(11, 0, 0),
-                            SlotDate = new DateOnly(2025, 1, 15),
-                            StartTime = new TimeOnly(10, 30, 0),
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 2,
-                            EndTime = new TimeOnly(9, 30, 0),
-                            SlotDate = new DateOnly(2025, 1, 15),
-                            StartTime = new TimeOnly(9, 0, 0),
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 2,
-                            EndTime = new TimeOnly(10, 0, 0),
-                            SlotDate = new DateOnly(2025, 1, 15),
-                            StartTime = new TimeOnly(9, 30, 0),
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 2,
-                            EndTime = new TimeOnly(10, 30, 0),
-                            SlotDate = new DateOnly(2025, 1, 15),
-                            StartTime = new TimeOnly(10, 0, 0),
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 3,
-                            EndTime = new TimeOnly(14, 30, 0),
-                            SlotDate = new DateOnly(2025, 1, 15),
-                            StartTime = new TimeOnly(14, 0, 0),
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 3,
-                            EndTime = new TimeOnly(15, 0, 0),
-                            SlotDate = new DateOnly(2025, 1, 15),
-                            StartTime = new TimeOnly(14, 30, 0),
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 3,
-                            EndTime = new TimeOnly(15, 30, 0),
-                            SlotDate = new DateOnly(2025, 1, 15),
-                            StartTime = new TimeOnly(15, 0, 0),
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 4,
-                            EndTime = new TimeOnly(11, 30, 0),
-                            SlotDate = new DateOnly(2025, 1, 15),
-                            StartTime = new TimeOnly(11, 0, 0),
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 4,
-                            EndTime = new TimeOnly(12, 0, 0),
-                            SlotDate = new DateOnly(2025, 1, 15),
-                            StartTime = new TimeOnly(11, 30, 0),
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = 13,
-                            CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 5,
-                            EndTime = new TimeOnly(16, 30, 0),
-                            SlotDate = new DateOnly(2025, 1, 15),
-                            StartTime = new TimeOnly(16, 0, 0),
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 14,
-                            CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 5,
-                            EndTime = new TimeOnly(17, 0, 0),
-                            SlotDate = new DateOnly(2025, 1, 15),
-                            StartTime = new TimeOnly(16, 30, 0),
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = 15,
-                            CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, 0, DateTimeKind.Utc),
-                            DoctorId = 5,
-                            EndTime = new TimeOnly(17, 30, 0),
-                            SlotDate = new DateOnly(2025, 1, 15),
-                            StartTime = new TimeOnly(17, 0, 0),
-                            Status = 0
-                        });
                 });
 
             modelBuilder.Entity("Entities.Concrete.Patient", b =>
@@ -332,63 +145,6 @@ namespace PatientService.DataAccess.Migrations
                         .IsUnique();
 
                     b.ToTable("Patient", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BirthDate = new DateOnly(1990, 5, 15),
-                            CreatedAt = new DateTime(2024, 1, 1, 10, 0, 0, 0, DateTimeKind.Utc),
-                            FirstName = "Ahmet",
-                            Gender = "Erkek",
-                            IdentityNumber = "12345678901",
-                            LastName = "Yılmaz",
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BirthDate = new DateOnly(1985, 8, 22),
-                            CreatedAt = new DateTime(2024, 1, 2, 11, 0, 0, 0, DateTimeKind.Utc),
-                            FirstName = "Ayşe",
-                            Gender = "Kadın",
-                            IdentityNumber = "12345678902",
-                            LastName = "Kaya",
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            BirthDate = new DateOnly(1978, 3, 10),
-                            CreatedAt = new DateTime(2024, 1, 3, 9, 0, 0, 0, DateTimeKind.Utc),
-                            FirstName = "Mehmet",
-                            Gender = "Erkek",
-                            IdentityNumber = "12345678903",
-                            LastName = "Demir",
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            BirthDate = new DateOnly(1995, 12, 1),
-                            CreatedAt = new DateTime(2024, 1, 4, 14, 0, 0, 0, DateTimeKind.Utc),
-                            FirstName = "Fatma",
-                            Gender = "Kadın",
-                            IdentityNumber = "12345678904",
-                            LastName = "Çelik",
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 5,
-                            BirthDate = new DateOnly(2000, 7, 25),
-                            CreatedAt = new DateTime(2024, 1, 5, 16, 0, 0, 0, DateTimeKind.Utc),
-                            FirstName = "Ali",
-                            Gender = "Erkek",
-                            IdentityNumber = "12345678905",
-                            LastName = "Öztürk",
-                            UserId = 5
-                        });
                 });
 
             modelBuilder.Entity("PatientService.Entities.Concrete.Doctor", b =>

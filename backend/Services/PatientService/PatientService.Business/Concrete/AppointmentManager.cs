@@ -32,7 +32,8 @@ namespace Business.Concrete
 
         public IDataResult<List<Appointment>> GetAll()
         {
-            return new SuccessDataResult<List<Appointment>>(_appointmentDal.GetAll(),"Message");
+            var result = _appointmentDal.GetAll(null, a => a.Doctor, a => a.Patient);
+            return new SuccessDataResult<List<Appointment>>(result, "Message");
         }
 
         public IDataResult<Appointment> GetById(int id)
@@ -43,7 +44,7 @@ namespace Business.Concrete
         public IDataResult<List<Appointment>> GetPacientHistories(int patientId)
         {
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
-            var result = _appointmentDal.GetAll(p => p.PatientId == patientId && p.AppointmentSlot.SlotDate < today);
+            var result = _appointmentDal.GetAll(p => p.PatientId == patientId && p.AppointmentSlot.SlotDate < today, a => a.Doctor, a => a.Patient);
             if (result.Count > 0)
             {
                 return new SuccessDataResult<List<Appointment>>(result);

@@ -1,5 +1,6 @@
 using Core.Utilities.Result;
 using Entities.Concrete;
+using PatientService.Entities.Concrete;
 
 namespace Business.Abstract
 {
@@ -11,7 +12,8 @@ namespace Business.Abstract
         IDataResult<AppointmentSlot> GetById(int id);
         IDataResult<List<AppointmentSlot>> GetAll();
         IDataResult<List<AppointmentSlot>> GetAllByDoctorId(int id);
-
+        IDataResult<List<AppointmentSlot>> GetAvailableSlot(DateOnly preferredDate, TimeOnly? preferredStartTime , TimeOnly? preferredEndTime);
+        Task<IResult> GenerateFutureSlotsAsync();
     }
 }
 

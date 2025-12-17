@@ -24,7 +24,11 @@ namespace AuthService.API.Controllers
             _mapper = mapper;
         }
 
-
+        [HttpGet("healtcheck")]
+        public IActionResult HealthCheck()
+        {
+            return Ok("Appointment Service is running.");
+        }
 
 
         [HttpPost("register")]

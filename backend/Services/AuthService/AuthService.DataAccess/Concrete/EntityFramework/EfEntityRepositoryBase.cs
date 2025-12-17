@@ -33,16 +33,45 @@ namespace AuthService.DataAccess.Concrete.EntityFramework
             _context.SaveChanges();
         }
 
-        public TEntity? Get(Expression<Func<TEntity, bool>> filter)
+        public TEntity Get(Expression<Func<TEntity, bool>> filter, params Expression<Func<TEntity, object>>[] includes)
         {
-            return _context.Set<TEntity>().SingleOrDefault(filter);
+
+                IQueryable<TEntity> query = _context.Set<TEntity>();
+                if (includes != null)
+                {
+                    foreach (var include in includes)
+                    {
+                        query = query.Include(include);
+                    }
+                }
+                if (filter != null)
+                {
+                    query = query.Where(filter);
+                }
+                return query.SingleOrDefault();
+            
         }
 
-        public List<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter = null)
+        public List<TEntity> GetAll(
+            Expression<Func<TEntity, bool>> filter = null,
+            params Expression<Func<TEntity, object>>[] includes)
         {
-            return filter == null
-                ? _context.Set<TEntity>().ToList()
-                : _context.Set<TEntity>().Where(filter).ToList();
+
+                IQueryable<TEntity> query = _context.Set<TEntity>();
+                if (includes != null && includes.Length > 0)
+                {
+                    foreach (var include in includes)
+                    {
+                        query = query.Include(include);
+                    }
+                }
+                if (filter != null)
+                {
+                    query = query.Where(filter);
+                }
+
+                return query.ToList();
+            
         }
 
         public void Update(TEntity entity)
@@ -71,6 +100,27 @@ namespace AuthService.DataAccess.Concrete.EntityFramework
             var entities = _context.Set<TEntity>().Where(filter).ToList();
             _context.Set<TEntity>().RemoveRange(entities);
             _context.SaveChanges();
+        }
+
+        public async Task<List<TEntity>> GetAllAsyncAsNoTracking(Expression<Func<TEntity, bool>> filter = null)
+        {
+
+                IQueryable<TEntity> query =  _context.Set<TEntity>();
+
+                if (filter != null)
+                    query = query.Where(filter);
+
+                return await query.AsNoTracking().ToListAsync();
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> filter)
+        {
+
+                return await _context.Set<TEntity>()
+                            .AsNoTracking()
+                            .AnyAsync(filter);
+
+
         }
     }
 }

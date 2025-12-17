@@ -20,13 +20,35 @@ namespace PatientService.API.Controllers
         }
 
 
+        [HttpGet("all")]
+        public IActionResult Get()
+        {
+            var result = _appointmentService.GetAll();
+            var mapped = _mapper.Map<List<GetAppointmentDto>>(result.Data);
+            if (result.IsSuccess)
+            {
+                return Ok(mapped);
+            }
+            return BadRequest(result);
+        }
+
+
+        [HttpGet("healtcheck")]
+        public IActionResult HealthCheck()
+        {
+            return Ok("Appointment Service is running.");
+        }
+
+
+
         [HttpGet("history")]
         public IActionResult GetHistories(int patientId)
         {
             var result = _appointmentService.GetPacientHistories(patientId);
+            var mapped = _mapper.Map<List<GetAppointmentDto>>(result.Data);
             if (result.IsSuccess)
             {
-                return Ok(result);
+                return Ok(mapped);
             }
             return BadRequest(result);
         }

@@ -1,4 +1,5 @@
 using Core.Entities;
+using PatientService.Entities.Concrete;
 using PatientService.Entities.Enums;
 
 namespace Entities.Concrete
@@ -14,6 +15,7 @@ namespace Entities.Concrete
         public DateTime CreatedAt { get; set; }
 
         public virtual Appointment? Appointment { get; set; }
+        public virtual Doctor Doctor { get; set; } = null!;
 
     }
 }
