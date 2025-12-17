@@ -6,7 +6,10 @@ import {
 import AuthPage from "@/pages/Auth";
 import Layout from "@/containers/Layout";
 import HomePage from "@/pages/Home";
+import DoctorsPage from "@/pages/Doctors";
+
 import { Toaster } from "react-hot-toast";
+import AppointmentsPage from "@/pages/Appointments";
 
 const router = createBrowserRouter([
 	{
@@ -17,6 +20,8 @@ const router = createBrowserRouter([
 		path: "/",
 		element: <Layout/>,
 		children: [
+			{ path: "/doctors", element: <DoctorsPage/> },
+			{ path: "/appointments", element: <AppointmentsPage/>},
 			{ path: "/", element: <HomePage/> }
 		]
 	}

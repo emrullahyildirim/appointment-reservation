@@ -164,7 +164,7 @@ const RegisterForm = ({ setForm }: RegisterFormProps) => {
               as="input"
               id="birthdate"
               name="birthdate"
-              placeholder="Doğum tarihi YY-AA-GG formatında giriniz."
+              placeholder="Doğum tarihi (YY-AA-GG)"
               className="py-3 text-gray-800"
             />
           </div>
