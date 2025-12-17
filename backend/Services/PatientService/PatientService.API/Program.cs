@@ -109,18 +109,8 @@ var app = builder.Build();
 
 app.UseCors("AllowAll");
 
-<<<<<<< HEAD
 app.UseSwagger();
 app.UseSwaggerUI();
-=======
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/patient/v1/swagger.json", "PatientService API V1");
-        c.RoutePrefix = "swagger";
-    });
->>>>>>> f70f20f (fix: stabilize patient service swagger and database startup with healthchecks)
-
 
 
 if (app.Environment.IsDevelopment())
