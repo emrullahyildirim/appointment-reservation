@@ -72,6 +72,27 @@ namespace AuthService.DataAccess.Concrete.EntityFramework
             _context.Set<TEntity>().RemoveRange(entities);
             _context.SaveChanges();
         }
+
+        public async Task<List<TEntity>> GetAllAsyncAsNoTracking(Expression<Func<TEntity, bool>> filter = null)
+        {
+
+                IQueryable<TEntity> query =  _context.Set<TEntity>();
+
+                if (filter != null)
+                    query = query.Where(filter);
+
+                return await query.AsNoTracking().ToListAsync();
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> filter)
+        {
+
+                return await _context.Set<TEntity>()
+                            .AsNoTracking()
+                            .AnyAsync(filter);
+
+
+        }
     }
 }
 

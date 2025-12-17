@@ -1,4 +1,4 @@
-﻿using Entities.Concrete;
+using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using PatientService.Entities.Concrete;
@@ -37,7 +37,7 @@ namespace PatientService.DataAccess.Concrete.EntityFramework
                 else
                 {
                     // Fallback for Docker: use postgres_db hostname
-                    optionsBuilder.UseNpgsql("Host=postgres_db;Database=PatientAppointmentDb;Username=patientservice_user;Password=patientservice_pass");
+                    optionsBuilder.UseNpgsql("Host=localhost;Database=PatientAppointmentDb;Username=postgres;Password=1234");
                 }
             }
         }
@@ -227,6 +227,133 @@ namespace PatientService.DataAccess.Concrete.EntityFramework
                 new Doctor { Id = 4, DoctorTitleId = 4, FirstName = "Emrullah", LastName = "Yıldırım" },
                 new Doctor { Id = 5, DoctorTitleId = 5, FirstName = "Mert", LastName = "Gökçe" }
              );
+
+            // Seed Patients
+            modelBuilder.Entity<Patient>().HasData(
+                new Patient 
+                { 
+                    Id = 1, 
+                    UserId = 1, 
+                    FirstName = "Ahmet", 
+                    LastName = "Yılmaz", 
+                    BirthDate = new DateOnly(1990, 5, 15), 
+                    Gender = "Erkek", 
+                    IdentityNumber = "12345678901",
+                    CreatedAt = new DateTime(2024, 1, 1, 10, 0, 0, DateTimeKind.Utc)
+                },
+                new Patient 
+                { 
+                    Id = 2, 
+                    UserId = 2, 
+                    FirstName = "Ayşe", 
+                    LastName = "Kaya", 
+                    BirthDate = new DateOnly(1985, 8, 22), 
+                    Gender = "Kadın", 
+                    IdentityNumber = "12345678902",
+                    CreatedAt = new DateTime(2024, 1, 2, 11, 0, 0, DateTimeKind.Utc)
+                },
+                new Patient 
+                { 
+                    Id = 3, 
+                    UserId = 3, 
+                    FirstName = "Mehmet", 
+                    LastName = "Demir", 
+                    BirthDate = new DateOnly(1978, 3, 10), 
+                    Gender = "Erkek", 
+                    IdentityNumber = "12345678903",
+                    CreatedAt = new DateTime(2024, 1, 3, 9, 0, 0, DateTimeKind.Utc)
+                },
+                new Patient 
+                { 
+                    Id = 4, 
+                    UserId = 4, 
+                    FirstName = "Fatma", 
+                    LastName = "Çelik", 
+                    BirthDate = new DateOnly(1995, 12, 1), 
+                    Gender = "Kadın", 
+                    IdentityNumber = "12345678904",
+                    CreatedAt = new DateTime(2024, 1, 4, 14, 0, 0, DateTimeKind.Utc)
+                },
+                new Patient 
+                { 
+                    Id = 5, 
+                    UserId = 5, 
+                    FirstName = "Ali", 
+                    LastName = "Öztürk", 
+                    BirthDate = new DateOnly(2000, 7, 25), 
+                    Gender = "Erkek", 
+                    IdentityNumber = "12345678905",
+                    CreatedAt = new DateTime(2024, 1, 5, 16, 0, 0, DateTimeKind.Utc)
+                }
+            );
+
+            // Seed AppointmentSlots (gelecek tarihler için)
+            modelBuilder.Entity<AppointmentSlot>().HasData(
+                // Doktor 1 için slotlar
+                new AppointmentSlot { Id = 1, DoctorId = 1, SlotDate = new DateOnly(2025, 1, 15), StartTime = new TimeOnly(9, 0), EndTime = new TimeOnly(9, 30), Status = AppointmentSlotStatus.Available, CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, DateTimeKind.Utc) },
+                new AppointmentSlot { Id = 2, DoctorId = 1, SlotDate = new DateOnly(2025, 1, 15), StartTime = new TimeOnly(9, 30), EndTime = new TimeOnly(10, 0), Status = AppointmentSlotStatus.Booked, CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, DateTimeKind.Utc) },
+                new AppointmentSlot { Id = 3, DoctorId = 1, SlotDate = new DateOnly(2025, 1, 15), StartTime = new TimeOnly(10, 0), EndTime = new TimeOnly(10, 30), Status = AppointmentSlotStatus.Available, CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, DateTimeKind.Utc) },
+                new AppointmentSlot { Id = 4, DoctorId = 1, SlotDate = new DateOnly(2025, 1, 15), StartTime = new TimeOnly(10, 30), EndTime = new TimeOnly(11, 0), Status = AppointmentSlotStatus.Available, CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, DateTimeKind.Utc) },
+                
+                // Doktor 2 için slotlar
+                new AppointmentSlot { Id = 5, DoctorId = 2, SlotDate = new DateOnly(2025, 1, 15), StartTime = new TimeOnly(9, 0), EndTime = new TimeOnly(9, 30), Status = AppointmentSlotStatus.Booked, CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, DateTimeKind.Utc) },
+                new AppointmentSlot { Id = 6, DoctorId = 2, SlotDate = new DateOnly(2025, 1, 15), StartTime = new TimeOnly(9, 30), EndTime = new TimeOnly(10, 0), Status = AppointmentSlotStatus.Available, CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, DateTimeKind.Utc) },
+                new AppointmentSlot { Id = 7, DoctorId = 2, SlotDate = new DateOnly(2025, 1, 15), StartTime = new TimeOnly(10, 0), EndTime = new TimeOnly(10, 30), Status = AppointmentSlotStatus.Available, CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, DateTimeKind.Utc) },
+                
+                // Doktor 3 için slotlar
+                new AppointmentSlot { Id = 8, DoctorId = 3, SlotDate = new DateOnly(2025, 1, 15), StartTime = new TimeOnly(14, 0), EndTime = new TimeOnly(14, 30), Status = AppointmentSlotStatus.Booked, CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, DateTimeKind.Utc) },
+                new AppointmentSlot { Id = 9, DoctorId = 3, SlotDate = new DateOnly(2025, 1, 15), StartTime = new TimeOnly(14, 30), EndTime = new TimeOnly(15, 0), Status = AppointmentSlotStatus.Available, CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, DateTimeKind.Utc) },
+                new AppointmentSlot { Id = 10, DoctorId = 3, SlotDate = new DateOnly(2025, 1, 15), StartTime = new TimeOnly(15, 0), EndTime = new TimeOnly(15, 30), Status = AppointmentSlotStatus.Available, CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, DateTimeKind.Utc) },
+                
+                // Doktor 4 için slotlar
+                new AppointmentSlot { Id = 11, DoctorId = 4, SlotDate = new DateOnly(2025, 1, 15), StartTime = new TimeOnly(11, 0), EndTime = new TimeOnly(11, 30), Status = AppointmentSlotStatus.Available, CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, DateTimeKind.Utc) },
+                new AppointmentSlot { Id = 12, DoctorId = 4, SlotDate = new DateOnly(2025, 1, 15), StartTime = new TimeOnly(11, 30), EndTime = new TimeOnly(12, 0), Status = AppointmentSlotStatus.Available, CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, DateTimeKind.Utc) },
+                
+                // Doktor 5 için slotlar
+                new AppointmentSlot { Id = 13, DoctorId = 5, SlotDate = new DateOnly(2025, 1, 15), StartTime = new TimeOnly(16, 0), EndTime = new TimeOnly(16, 30), Status = AppointmentSlotStatus.Booked, CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, DateTimeKind.Utc) },
+                new AppointmentSlot { Id = 14, DoctorId = 5, SlotDate = new DateOnly(2025, 1, 15), StartTime = new TimeOnly(16, 30), EndTime = new TimeOnly(17, 0), Status = AppointmentSlotStatus.Available, CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, DateTimeKind.Utc) },
+                new AppointmentSlot { Id = 15, DoctorId = 5, SlotDate = new DateOnly(2025, 1, 15), StartTime = new TimeOnly(17, 0), EndTime = new TimeOnly(17, 30), Status = AppointmentSlotStatus.Available, CreatedAt = new DateTime(2024, 12, 1, 10, 0, 0, DateTimeKind.Utc) }
+            );
+
+            // Seed Appointments (Booked slotlar için)
+            modelBuilder.Entity<Appointment>().HasData(
+                new Appointment 
+                { 
+                    Id = 1, 
+                    PatientId = 1, 
+                    DoctorId = 1, 
+                    SlotId = 2, 
+                    Status = AppointmentStatus.Confirmed, 
+                    CreatedAt = new DateTime(2024, 12, 10, 10, 0, 0, DateTimeKind.Utc) 
+                },
+                new Appointment 
+                { 
+                    Id = 2, 
+                    PatientId = 2, 
+                    DoctorId = 2, 
+                    SlotId = 5, 
+                    Status = AppointmentStatus.Confirmed, 
+                    CreatedAt = new DateTime(2024, 12, 11, 11, 0, 0, DateTimeKind.Utc) 
+                },
+                new Appointment 
+                { 
+                    Id = 3, 
+                    PatientId = 3, 
+                    DoctorId = 3, 
+                    SlotId = 8, 
+                    Status = AppointmentStatus.Pending, 
+                    CreatedAt = new DateTime(2024, 12, 12, 14, 0, 0, DateTimeKind.Utc) 
+                },
+                new Appointment 
+                { 
+                    Id = 4, 
+                    PatientId = 4, 
+                    DoctorId = 5, 
+                    SlotId = 13, 
+                    Status = AppointmentStatus.Confirmed, 
+                    CreatedAt = new DateTime(2024, 12, 13, 16, 0, 0, DateTimeKind.Utc) 
+                }
+            );
 
 
         }

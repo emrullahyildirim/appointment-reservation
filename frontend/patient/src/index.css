@@ -7,8 +7,7 @@
   --color-error: #D53434;
   --color-info: #CFA83D;
   --color-success: #30BAA5;
-}
-=======
+}=======
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -40,7 +39,6 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
-
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -78,3 +76,5 @@ button:focus-visible {
   }
 }
 >>>>>>> 2f0ad78aed5ac9632cd0aaa86603f1b9d6a02723
+
+
