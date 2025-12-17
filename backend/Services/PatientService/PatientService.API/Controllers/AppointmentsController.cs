@@ -24,9 +24,10 @@ namespace PatientService.API.Controllers
         public IActionResult Get()
         {
             var result = _appointmentService.GetAll();
+            var mapped = _mapper.Map<List<GetAppointmentDto>>(result.Data);
             if (result.IsSuccess)
             {
-                return Ok(result);
+                return Ok(mapped);
             }
             return BadRequest(result);
         }
@@ -44,9 +45,10 @@ namespace PatientService.API.Controllers
         public IActionResult GetHistories(int patientId)
         {
             var result = _appointmentService.GetPacientHistories(patientId);
+            var mapped = _mapper.Map<List<GetAppointmentDto>>(result.Data);
             if (result.IsSuccess)
             {
-                return Ok(result);
+                return Ok(mapped);
             }
             return BadRequest(result);
         }

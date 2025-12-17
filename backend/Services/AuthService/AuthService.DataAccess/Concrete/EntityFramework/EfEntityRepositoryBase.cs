@@ -33,16 +33,45 @@ namespace AuthService.DataAccess.Concrete.EntityFramework
             _context.SaveChanges();
         }
 
-        public TEntity? Get(Expression<Func<TEntity, bool>> filter)
+        public TEntity Get(Expression<Func<TEntity, bool>> filter, params Expression<Func<TEntity, object>>[] includes)
         {
-            return _context.Set<TEntity>().SingleOrDefault(filter);
+
+                IQueryable<TEntity> query = _context.Set<TEntity>();
+                if (includes != null)
+                {
+                    foreach (var include in includes)
+                    {
+                        query = query.Include(include);
+                    }
+                }
+                if (filter != null)
+                {
+                    query = query.Where(filter);
+                }
+                return query.SingleOrDefault();
+            
         }
 
-        public List<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter = null)
+        public List<TEntity> GetAll(
+            Expression<Func<TEntity, bool>> filter = null,
+            params Expression<Func<TEntity, object>>[] includes)
         {
-            return filter == null
-                ? _context.Set<TEntity>().ToList()
-                : _context.Set<TEntity>().Where(filter).ToList();
+
+                IQueryable<TEntity> query = _context.Set<TEntity>();
+                if (includes != null && includes.Length > 0)
+                {
+                    foreach (var include in includes)
+                    {
+                        query = query.Include(include);
+                    }
+                }
+                if (filter != null)
+                {
+                    query = query.Where(filter);
+                }
+
+                return query.ToList();
+            
         }
 
         public void Update(TEntity entity)

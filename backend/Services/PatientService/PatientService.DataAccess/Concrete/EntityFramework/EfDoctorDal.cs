@@ -12,10 +12,11 @@ namespace PatientService.DataAccess.Concrete.EntityFramework
         {
             using (PatientAppointmentContext context = new PatientAppointmentContext())
             {
-                var result = context.Doctors.Include(d => d.Appointments)
-                                            .Where(d => d.Id == doctorId)
-                                            .SelectMany(d => d.Appointments)
-                                            .ToList();
+                var result = context.Appointments
+                                    .Include(a => a.Patient)
+                                    .Where(d => d.Id == doctorId)
+                                    .Include(d => d.Doctor)
+                                    .ToList();
                 return result;
             }
         }

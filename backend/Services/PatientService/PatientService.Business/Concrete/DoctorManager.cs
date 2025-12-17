@@ -29,7 +29,7 @@ namespace PatientService.Business.Concrete
 
         public IDataResult<List<Doctor>> GetAll()
         {
-            return new SuccessDataResult<List<Doctor>>(_doctorDal.GetAll(),"Message");
+            return new SuccessDataResult<List<Doctor>>(_doctorDal.GetAll(includes: a => a.DoctorTitle),"Message");
         }
 
         public async Task<IDataResult<List<Doctor>>> GetAllAsyncAsNoTracking()

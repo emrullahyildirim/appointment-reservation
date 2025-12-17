@@ -21,7 +21,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "PatientService API",
+        Version = "v1",
+        Description = "Patient Appointment Service API"
+    });
+});
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddDbContext<PatientAppointmentContext>(options =>
@@ -65,16 +73,10 @@ var app = builder.Build();
 app.UseCors("AllowAll");
 // Configure the HTTP request pipeline.
 
-    app.UseSwagger(c =>
-    {
-        c.RouteTemplate = "swagger/{documentName}/swagger.json";
-    });
+    app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        // Nginx arkasından erişildiğinde /swagger/patient/v1/swagger.json kullan
-        // Doğrudan erişimde /swagger/v1/swagger.json kullan
-        // Her iki durumda da çalışması için /swagger/patient/v1/swagger.json kullan
-        c.SwaggerEndpoint("/swagger/patient/v1/swagger.json", "PatientService API V1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "PatientService API V1");
         c.RoutePrefix = "swagger";
     });
 

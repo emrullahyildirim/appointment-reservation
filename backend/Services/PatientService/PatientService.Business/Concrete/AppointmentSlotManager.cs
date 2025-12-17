@@ -34,12 +34,12 @@ namespace Business.Concrete
 
         public IDataResult<List<AppointmentSlot>> GetAll()
         {
-            return new SuccessDataResult<List<AppointmentSlot>>(_appointmentslotDal.GetAll(),"Message");
+            return new SuccessDataResult<List<AppointmentSlot>>(_appointmentslotDal.GetAll(includes: a => a.Doctor),"Message");
         }
 
         public IDataResult<List<AppointmentSlot>> GetAllByDoctorId(int id)
         {
-            var result = _appointmentslotDal.GetAll(p => p.DoctorId == id);
+            var result = _appointmentslotDal.GetAll(p => p.DoctorId == id, includes: a => a.Doctor);
             if (result.Count > 0)
             {
                 return new SuccessDataResult<List<AppointmentSlot>>(result);
