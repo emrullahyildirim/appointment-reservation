@@ -71,11 +71,10 @@ app.UseCors("AllowAll");
     });
     app.UseSwaggerUI(c =>
     {
-        // Development: doğrudan çalıştırma, Production: nginx arkasından
-        var endpoint = app.Environment.IsDevelopment() 
-            ? "/swagger/v1/swagger.json" 
-            : "/swagger/patient/v1/swagger.json";
-        c.SwaggerEndpoint(endpoint, "PatientService API V1");
+        // Nginx arkasından erişildiğinde /swagger/patient/v1/swagger.json kullan
+        // Doğrudan erişimde /swagger/v1/swagger.json kullan
+        // Her iki durumda da çalışması için /swagger/patient/v1/swagger.json kullan
+        c.SwaggerEndpoint("/swagger/patient/v1/swagger.json", "PatientService API V1");
         c.RoutePrefix = "swagger";
     });
 
