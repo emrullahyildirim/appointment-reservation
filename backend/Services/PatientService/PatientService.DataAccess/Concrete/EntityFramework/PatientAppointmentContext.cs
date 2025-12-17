@@ -29,7 +29,7 @@ namespace PatientService.DataAccess.Concrete.EntityFramework
             if (!optionsBuilder.IsConfigured)
             {
                 // Use connection string from environment variable or appsettings.json
-                var conn = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+                var conn = Environment.GetEnvironmentVariable("ConnectionStrings__PatientAppointmentDb");
                 if (!string.IsNullOrEmpty(conn))
                 {
                     optionsBuilder.UseNpgsql(conn);

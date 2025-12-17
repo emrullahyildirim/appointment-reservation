@@ -88,6 +88,7 @@ if (app.Environment.IsDevelopment())
     try
     {
         var db = services.GetRequiredService<PatientAppointmentContext>();
+        db.Database.EnsureDeleted();
         db.Database.Migrate();
     }
     catch (Exception ex)
