@@ -18,6 +18,7 @@ app.post('/login', (req, res) => {
 
 	if (email === "admin@admin.com" && password === "123456")
 			return res.status(200).json({success: true, message: "Giriş yapıldı!"});
+	return res.status(400).json({ success: false, message: 'Wrong credentials!'});
 });
 
 const PORT = 3001;
