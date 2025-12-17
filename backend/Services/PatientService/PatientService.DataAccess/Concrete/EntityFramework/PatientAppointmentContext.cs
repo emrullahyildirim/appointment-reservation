@@ -23,20 +23,22 @@ namespace PatientService.DataAccess.Concrete.EntityFramework
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (optionsBuilder.IsConfigured)
+            // OnConfiguring is only called if options are not configured in Program.cs
+            // Since we configure it in Program.cs, this should not be called in normal operation
+            // But we keep it for compatibility with EfEntityRepositoryBase which requires parameterless constructor
+            if (!optionsBuilder.IsConfigured)
             {
-                return;
-            }
-
-            var conn = Environment.GetEnvironmentVariable("CONNECTION_STRING");
-            if (!string.IsNullOrEmpty(conn))
-            {
-                optionsBuilder.UseNpgsql(conn);
-            }
-            else
-            {
-                // fallback (development vs.)
-                optionsBuilder.UseNpgsql("Host=localhost;Database=PatientAppointmentDb;Username=postgres;Password=1234");
+                // Use connection string from environment variable or appsettings.json
+                var conn = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+                if (!string.IsNullOrEmpty(conn))
+                {
+                    optionsBuilder.UseNpgsql(conn);
+                }
+                else
+                {
+                    // Fallback for Docker: use postgres_db hostname
+                    optionsBuilder.UseNpgsql("Host=postgres_db;Database=PatientAppointmentDb;Username=patientservice_user;Password=patientservice_pass");
+                }
             }
         }
 

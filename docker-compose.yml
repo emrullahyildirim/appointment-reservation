@@ -3,6 +3,8 @@ version: '3.8'
 services:
   patient_website:
     build: ./frontend/patient
+    networks:
+      - app-network
     #ports:
     #  - "3000:80"
 
@@ -10,11 +12,18 @@ services:
     build: 
       context: ./backend
       dockerfile: Services/AuthService/Dockerfile
+    networks:
+      - app-network
 
   patient_service:
     build:
       context: ./backend
       dockerfile: Services/PatientService/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_ENVIRONMENT=Development
+    networks:
+      - app-network
   
   nginx_gateway:
     image: nginx:alpine3.23
@@ -26,11 +35,20 @@ services:
     depends_on:
       - auth_service
       - patient_service
+      - patient_website
+    networks:
+      - app-network
 
   postgres_db:
     image: postgres:18-alpine
     restart: always
     env_file: "infra/postgres/.env"
-# Development için gerekirse şu satırı ekleyebiliriz: ports: ["5432:5432"]
+    # Development için gerekirse şu satırı ekleyebiliriz: ports: ["5432:5432"]
     volumes:
       - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
