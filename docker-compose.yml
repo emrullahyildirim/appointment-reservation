@@ -1,60 +1,148 @@
-version: '3.8'
-
 services:
-  patient_website:
-    build: ./frontend/patient
+  # PostgreSQL Database
+  postgres_db:
+    image: postgres:18-alpine
+    container_name: appointment_postgres
+    restart: unless-stopped
+    env_file: "infra/postgres/.env"
+    ports:
+      - "5432:5432"  # Exposed for development/debugging
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
+  # Authentication Service
   auth_service:
     build: 
-      context: ./backend
-      dockerfile: Services/AuthService/Dockerfile
+      context: .
+      dockerfile: backend/Services/AuthService/Dockerfile
+    container_name: appointment_auth_service
+    restart: unless-stopped
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__AuthDb=Host=postgres_db;Database=AuthServiceDb;Username=authservice_user;Password=authservice_pass
       - TokenOptions__SecurityKey=${TOKEN_SECURITY_KEY:-MySuperSecretSecurityKey1234567890123456789012345678901234567890ABCDEF}
-      - TokenOptions__Issuer=${TOKEN_ISSUER:-www.myapp.com}
-      - TokenOptions__Audience=${TOKEN_AUDIENCE:-www.myapp.com}
+      - TokenOptions__Issuer=${TOKEN_ISSUER:-www.appointment-system.com}
+      - TokenOptions__Audience=${TOKEN_AUDIENCE:-www.appointment-system.com}
       - PatientService__Path=http://patient_service:8080/api/Patients
+    depends_on:
+      postgres_db:
+        condition: service_healthy
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/health", "||", "exit", "1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
+  # Patient Service
   patient_service:
     build:
-      context: ./backend
-      dockerfile: Services/PatientService/Dockerfile
+      context: .
+      dockerfile: backend/Services/PatientService/Dockerfile
+    container_name: appointment_patient_service
+    restart: unless-stopped
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - DOTNET_ENVIRONMENT=Development
       - ConnectionStrings__PatientAppointmentDb=Host=postgres_db;Database=PatientAppointmentDb;Username=patientservice_user;Password=patientservice_pass
+    depends_on:
+      postgres_db:
+        condition: service_healthy
     networks:
       - app-network
-  
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/health", "||", "exit", "1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Frontend Application
+  patient_website:
+    build:
+      context: ./frontend/patient
+      dockerfile: Dockerfile
+    container_name: appointment_frontend
+    restart: unless-stopped
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health", "||", "exit", "1"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Nginx API Gateway
   nginx_gateway:
     image: nginx:alpine3.23
-    restart: always
+    container_name: appointment_gateway
+    restart: unless-stopped
     ports:
       - "80:80"
+      - "443:443"  # Reserved for future HTTPS support
     volumes:
       - ./gateway/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - nginx_logs:/var/log/nginx
     depends_on:
-      - auth_service
-      - patient_service
-      - patient_website
+      auth_service:
+        condition: service_healthy
+      patient_service:
+        condition: service_healthy
+      patient_website:
+        condition: service_healthy
     networks:
       - app-network
-
-  postgres_db:
-    image: postgres:18-alpine
-    restart: always
-    env_file: "infra/postgres/.env"
-    # Development için gerekirse şu satırı ekleyebiliriz: ports: ["5432:5432"]
-    volumes:
-      - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
-    networks:
-      - app-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health", "||", "exit", "1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 networks:
   app-network:
     driver: bridge
+    name: appointment_network
+
+volumes:
+  postgres_data:
+    name: appointment_postgres_data
+  nginx_logs:
+    name: appointment_nginx_logs

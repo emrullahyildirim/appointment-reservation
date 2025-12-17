@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Core\Core.csproj" />
-    <ProjectReference Include="..\Entities\PatientService.Entities.csproj" />
     <ProjectReference Include="..\PatientService.Entities\PatientService.Entities.csproj" />
   </ItemGroup>
 
