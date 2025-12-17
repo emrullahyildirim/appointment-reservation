@@ -41,7 +41,7 @@ const Topbar = ({ setSidebarOpened }: TopbarProps) => {
 				>
 					<Link 
 						className="bg-primary hover:bg-primary/90 transition-colors text-white text-base px-8 py-3 rounded-lg whitespace-nowrap"
-						to="/auth/login"
+						to="/auth"
 					>
 						Randevu Al
 					</Link>
