@@ -76,7 +76,10 @@ app.UseCors("AllowAll");
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "PatientService API V1");
+        // Nginx üzerinden erişimde Swagger UI gateway path'ini kullanmalı
+        // Tarayıcıdaki URL: /swagger/patient/v1/swagger.json
+        // Nginx bu isteği /swagger/v1/swagger.json'a rewrite edip patient_service'e yönlendirir
+        c.SwaggerEndpoint("/swagger/patient/v1/swagger.json", "PatientService API V1");
         c.RoutePrefix = "swagger";
     });
 
@@ -90,8 +93,8 @@ if (app.Environment.IsDevelopment())
     try
     {
         var db = services.GetRequiredService<PatientAppointmentContext>();
-        db.Database.EnsureDeleted();
-        db.Database.Migrate();
+        // Geliştirme ortamında, şema yoksa otomatik oluştur (migrations'a bağlı kalmadan)
+        db.Database.EnsureCreated();
     }
     catch (Exception ex)
     {
