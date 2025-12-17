@@ -3,7 +3,6 @@ import { FaRegUser } from "react-icons/fa";
 import { MdLockOpen } from "react-icons/md";
 import { LoginWithCredentials } from "@/services/auth";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 interface AuthLoginProps {
@@ -17,7 +16,6 @@ interface AuthFormProps {
 
 const RegisterForm = ({ setForm }: AuthFormProps) => {
   const [loading, setLoading] = useState(false);
-	const navigate = useNavigate();
   const initialValues: AuthLoginProps = {
     email: "",
     password: "",
