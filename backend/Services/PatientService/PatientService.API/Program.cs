@@ -12,12 +12,7 @@ using PatientService.Business.Concrete;
 using PatientService.Business.Mapping.Profiles;
 using PatientService.DataAccess.Abstract;
 using PatientService.DataAccess.Concrete.EntityFramework;
-using Core.Utilities.Notification.Mail;
-using Core.Utilities.Notification.Mail.SmptMail;
-using PatientService.Business.Abstract;
-using PatientService.Business.Concrete;
-using PatientService.DataAccess.Abstract;
-using Core.CrossCuttingConcerns.Logging;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +28,7 @@ builder.Services.AddDbContext<PatientAppointmentContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("PatientAppointmentDb"), 
                      npgsqlOptions => npgsqlOptions.MigrationsAssembly("PatientService.DataAccess")));
 
+builder.Services.AddHostedService<SlotGenerationBackgroundService>();
 
 
 builder.Services.AddScoped<IAppointmentService, AppointmentManager>();
@@ -47,8 +43,8 @@ builder.Services.AddScoped<IPatientDal, EfPatientDal>();
 builder.Services.AddScoped<IDoctorService, DoctorManager>();
 builder.Services.AddScoped<IDoctorDal, EfDoctorDal>();
 
-builder.Services.AddScoped<PatientService.Business.Abstract.IWaitlistService, PatientService.Business.Concrete.WaitlistManager>();
-builder.Services.AddScoped<PatientService.DataAccess.Abstract.IWaitlistDal, PatientService.DataAccess.Concrete.EntityFramework.EfWaitlistDal>();
+builder.Services.AddScoped<IWaitlistService, WaitlistManager>();
+builder.Services.AddScoped<IWaitlistDal, EfWaitlistDal>();
 builder.Services.AddSingleton<ILoggerServiceBase, SerilogLogger>();
 builder.Services.AddScoped<IMailService, MailSender>();
 
